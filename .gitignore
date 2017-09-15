@@ -97,3 +97,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+#debug files
+game.py
+run.bat
