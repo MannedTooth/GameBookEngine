@@ -1,4 +1,26 @@
+import os
+import random
 import terminalsize
+
+class Player:
+	'''
+		A class for a player.
+	'''
+	def __init__(self, info={}):
+	'''
+		Instantiates a player.
+		info : a dictionnary with all the desired info on the player
+	'''
+		for key, value in additionalStats.items():
+			self.info[key] = value
+
+	def getInfo(self, infoName):
+	'''
+		Returns the requested info about the player.
+		infoname : the name of the key in the info dictionnary
+	'''
+		return self.info[infoName]
+
 
 def askInteger(question):
 	'''
@@ -67,5 +89,22 @@ def header(text, align="center"):
 
 	for i in range(0, terminalWidth):
 		print("=", end="")
+
+def statsHeader():
+	pass
+
+def rollDie(faces=6):
+	'''
+		Simulates a die roll.
+		faces : number of faces on the rolled die (defaults to 6)
+		Returns a random integer between 1 and 'faces'.
+	'''
+	return random.randint(0, faces)
+
+def clearScreen():
+	'''
+		Clears the screen.
+	'''
+	os.system('cls' if os.name == 'nt' else 'clear')
 
 		
