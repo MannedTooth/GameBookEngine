@@ -90,8 +90,16 @@ def header(text, align="center"):
 	for i in range(0, terminalWidth):
 		print("=", end="")
 
-def statsHeader():
-	pass
+def infoHeader():
+	terminalWidth = terminalsize.get_terminal_size()[0]
+	for i in range(0, terminalWidth):
+		print("=", end="")
+
+	
+
+	for i in range(0, terminalWidth):
+		print("=", end="")
+
 
 def rollDie(faces=6):
 	'''
