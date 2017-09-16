@@ -68,14 +68,13 @@ def paragraph(text):
 		if (position + len(word) > terminalWidth):
 			print("\n" + word, end=" ")
 			position = len(word) + 1
-		elif (position + len(word) == terminalWidth):
+		elif (word == "\n" or position + len(word) == terminalWidth):
 			print(word, end="")
 			position = 0
 		else:
 			print(word, end=" ")
 			position = position + len(word) + 1
 		
-
 	input("\n")
 
 def header(text, align="center"):
