@@ -56,6 +56,21 @@ def askIntegerWithinRange(question, minimum, maximum):
 			userInput = askInteger("Invalid input. Value must be between " + str(minimum) + " and " + str(maximum))
 	return userInput
 
+def askChoice(*choices, question="Choice: ", canCancel=False):
+	#	Asks the user to make a choice between the given options.
+	#	choices   : the choices the user can pick from
+	#	question  : the question to ask the user on prompt (defaults to "Choice: ")
+	#	canCancel : determines if an option for cancelling  should be added (defaults to False)
+	#	Returns the choice of the user in the form of an integer.
+	minimumChoice = 1
+	for i in range (0, len(choices)):
+		print(str(i + 1) + " - " + choices[i])
+	if (canCancel == True):
+		minimumChoice = 0
+		print("0 - Cancel")
+	print()
+	return askIntegerWithinRange(question, minimumChoice, len(choices))
+
 def paragraph(text):
 	#	Prints text and wait for the user to press enter.
 	#	text : the text to print
