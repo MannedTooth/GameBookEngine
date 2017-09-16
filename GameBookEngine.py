@@ -3,31 +3,33 @@ import random
 import terminalsize
 
 class Player:
-	'''
-		A class for a player.
-	'''
-	def __init__(self, info={}):
-	'''
-		Instantiates a player.
-		info : a dictionnary with all the desired info on the player
-	'''
-		for key, value in additionalStats.items():
-			self.info[key] = value
+	#	A class for a player.
+	
+	def __init__(self, skill, stamina, luck):
+	#	Instantiates a player.
+
+		self.skill = skill
+		self.stamina = stamina
+		self.luck = luck
 
 	def getInfo(self, infoName):
-	'''
-		Returns the requested info about the player.
-		infoname : the name of the key in the info dictionnary
-	'''
+	#	Returns the requested info about the player.
+	#	infoname : the name of the key in the info dictionnary
+
 		return self.info[infoName]
+
+class Creature:
+	# A class for an enemy creature.
+
+	def __init__(self):
+		pass
 
 
 def askInteger(question):
-	'''
-		Asks the user to enter an integer value.
-		question : the question to ask the user
-		Returns the user's input.
-	'''
+	#	Asks the user to enter an integer value.
+	#	question : the question to ask the user
+	#	Returns the user's input.
+	
 	valid = False
 	userInput = input(question + "\n")
 	while (valid == False):
@@ -39,13 +41,12 @@ def askInteger(question):
 	return userInput
 
 def askIntegerWithinRange(question, minimum, maximum):
-	'''
-		Asks the user to enter an integer value contained within a determined range.
-		question : the question to ask the user
-		minimum  : the smallest value the user is allowed to enter
-		maximum  : the biggest value the user is allowed to enter
-		Returns the user's input.
-	'''
+	#	Asks the user to enter an integer value contained within a determined range.
+	#	question : the question to ask the user
+	#	minimum  : the smallest value the user is allowed to enter
+	#	maximum  : the biggest value the user is allowed to enter
+	#	Returns the user's input.
+	
 	valid = False
 	userInput = askInteger(question)
 	while (valid == False):
@@ -56,20 +57,36 @@ def askIntegerWithinRange(question, minimum, maximum):
 	return userInput
 
 def paragraph(text):
-	'''
-		Prints text and wait for the user to press enter.
-		text : the text to print
-	'''
-	input(text)
+	#	Prints text and wait for the user to press enter.
+	#	text : the text to print
+	terminalWidth = terminalsize.get_terminal_size()[0]
+	position = 0
+	words = []
+	words = text.split(" ")
+
+	for word in words:
+		if (position + len(word) > terminalWidth):
+			print("\n" + word, end=" ")
+			position = len(word) + 1
+		elif (position + len(word) == terminalWidth):
+			print(word, end="")
+			position = 0
+		else:
+			print(word, end=" ")
+			position = position + len(word) + 1
+		
+
+	input("\n")
 
 def header(text, align="center"):
-	'''
-		Prints a header containing a title.
-		text  : the title to display
-		align : the alignment of the title ('left', 'center' or 'right') (defaults to 'center')
-	'''
+	#	Prints a header containing a title.
+	#	text  : the title to display
+	#	align : the alignment of the title ('left', 'center' or 'right') (defaults to 'center')
+	
 	terminalWidth = terminalsize.get_terminal_size()[0]
 	startPosition = 0
+
+	clearScreen()
 
 	for i in range(0, terminalWidth):
 		print("=", end="")
@@ -95,24 +112,31 @@ def infoHeader():
 	for i in range(0, terminalWidth):
 		print("=", end="")
 
-	
-
 	for i in range(0, terminalWidth):
 		print("=", end="")
 
 
-def rollDie(faces=6):
-	'''
-		Simulates a die roll.
-		faces : number of faces on the rolled die (defaults to 6)
-		Returns a random integer between 1 and 'faces'.
-	'''
-	return random.randint(0, faces)
+def rollDice(numberOfDice=1, faces=6):
+	#	Simulates a die roll.
+	#	numberOfDice : number of dice to roll (defaults to 1)
+	#	faces        : number of faces on the rolled die (defaults to 6)
+	#	Returns a list of random integers between 1 and 'faces'.
+
+	dices = []
+	for i in range(0, numberOfDice):
+		dices.append(random.randint(1, faces))
+
+	return dices
+
+def sumOfRollDice(numberOfDice=1, faces=6):
+	#	Sums the result of a die roll.
+	#	numberOfDice : number of dice to roll (defaults to 1)
+	#	faces        : number of faces on the rolled die (defaults to 6)
+	#	Returns the sum of the die roll.
+
+	return sum(rollDice(numberOfDice, faces))
 
 def clearScreen():
-	'''
-		Clears the screen.
-	'''
+	#	Clears the screen.
+	
 	os.system('cls' if os.name == 'nt' else 'clear')
-
-		
